@@ -8,19 +8,23 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     // Carrega o produto pelo método provider.
-    final product = Provider.of<Product>(context);
+    // listen é opcional esta sendo usado para o exemplo do consumer
+    final product = Provider.of<Product>(context, listen: false);
 
     return ClipRRect(
       borderRadius: BorderRadiusGeometry.circular(10),
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black54,
-          leading: IconButton(
-            onPressed: () {
-              product.toggleFavorite();
-            },
-            icon: Icon(product.isFavorite ? Icons.favorite : Icons.favorite_border),
-            color: Theme.of(context).primaryColorLight,
+          // Consumer atualiza apenas o icone e otimiza mais ainda a gestao de estado
+          leading: Consumer<Product>(
+            builder: (ctx, product, _) => IconButton(
+              onPressed: () {
+                product.toggleFavorite();
+              },
+              icon: Icon(product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           title: Text(product.title, textAlign: TextAlign.center),
           trailing: IconButton(
