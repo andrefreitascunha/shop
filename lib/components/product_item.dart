@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shop/models/product.dart';
 import 'package:shop/utils/app_routes.dart';
 
+import '../models/cart.dart';
+
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,6 +12,7 @@ class ProductItem extends StatelessWidget {
     // Carrega o produto pelo método provider.
     // listen é opcional esta sendo usado para o exemplo do consumer
     final product = Provider.of<Product>(context, listen: false);
+    final cart = Provider.of<Cart>(context, listen: false);
 
     return ClipRRect(
       borderRadius: BorderRadiusGeometry.circular(10),
@@ -26,9 +29,12 @@ class ProductItem extends StatelessWidget {
               color: Theme.of(context).primaryColorLight,
             ),
           ),
-          title: Text(product.title, textAlign: TextAlign.center),
+          title: Text(product.name, textAlign: TextAlign.center),
           trailing: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              cart.addItem(product);
+
+            },
             icon: Icon(Icons.shopping_cart),
             color: Theme.of(context).primaryColorLight,
           ),
