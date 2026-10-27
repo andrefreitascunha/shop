@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/components/badgetag.dart';
+import '../components/app_drawer.dart';
 import '../components/product_grid.dart';
 import '../models/cart.dart';
 import '../utils/app_routes.dart';
@@ -63,6 +64,7 @@ class _ProductOverviewPageState extends State<ProductOverviewPage> {
         ],
       ),
       body: ProductGrid(_showFavoriteOnly),
+      drawer: AppDrawer(),
     );
   }
 }
