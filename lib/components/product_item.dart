@@ -11,6 +11,8 @@ class ProductItem extends StatelessWidget {
 
     // Carrega o produto pelo método provider.
     // listen é opcional esta sendo usado para o exemplo do consumer
+    // com listen false a rederização foca no consumer do icone de favorito
+    // otimizando apenas o elemento que muda na tela
     final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
 
